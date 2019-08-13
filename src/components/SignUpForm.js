@@ -3,7 +3,7 @@ import React from 'react';
 export default class SignUpForm extends React.Component {
   render() {
     return <form onSubmit={this.props.onSubmit}>
-      <h3>Sign up to create a new room:</h3>
+      <h3>Sign up:</h3>
       <input
         type="text"
         name="userName"
