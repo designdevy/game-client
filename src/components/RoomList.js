@@ -87,9 +87,9 @@ class RoomList extends React.Component {
     const rooms = this.props.rooms.map(room => (
       <div key={room.id}>
         <p>
-          {room.name} status: {room.status}
+          {room.name}
         </p>
-        <button value={room.id} onClick={this.handleClickJoin}>Join</button>
+        {room.users.length === 2 ? <p>game in progress...</p> : <button value={room.id} onClick={this.handleClickJoin}>Join</button>}
       </div>
     ));
 

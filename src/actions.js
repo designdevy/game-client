@@ -34,7 +34,7 @@ export const login = (name, password) => dispatch => {
     .post(`${serverUrl}/logins`)
     .send(payload)
     .then(response => {
-      const action = newLogin(response.body.jwt)
+      const action = newLogin(response.body)
       dispatch(action)
     })
     .catch(console.error)
