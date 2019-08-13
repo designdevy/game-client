@@ -19,6 +19,16 @@ class GameContainer extends React.Component {
     });
   };
 
+  restartGame = async (event) => {
+    event.preventDefault();
+    await superagent
+      .put(`${serverUrl}/rooms/${this.props.match.params.id}`)
+      .send({
+        roomId: this.props.match.params.id,
+        userId: this.props.user.id
+      });
+  }
+
   render() {
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
@@ -28,6 +38,7 @@ class GameContainer extends React.Component {
         user={this.props.user}
         room={room}
         onClick={this.handleChoice}
+        restartGame={this.restartGame}
       />
     );
   }
