@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function LogInForm (props) {
     return <form onSubmit={props.onSubmit}>
-      <h3>Log in to create a new room:</h3>
+      <h3>Log in:</h3>
       <input
         type="text"
         name="name"
