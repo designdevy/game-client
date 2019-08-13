@@ -6,6 +6,47 @@ import { addUser } from "../actions";
 import { Redirect } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import LoginFormContainer from "./SignUpForm/LoginFormContainer";
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`user-loginpanel-${index}`}
+      aria-labelledby={`user-login-${index}`}
+      {...other}
+    >
+      <Card>
+        <CardContent>{children}</CardContent>
+      </Card>
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `user-login-${index}`,
+    'aria-controls': `user-loginpanel-${index}`,
+  };
+}
+
 
 class RoomList extends React.Component {
   state = {
@@ -14,8 +55,15 @@ class RoomList extends React.Component {
     email: "",
     password: "",
     redirect: false,
-    roomId: ""
+    roomId: "",
+    tabValue: 0,
   };
+
+  handleChangeTab = (event, newValue) => {
+    this.setState({
+      tabValue: newValue
+    });
+  }
 
   handleClickJoin = async event => {
     event.preventDefault();
@@ -75,7 +123,7 @@ class RoomList extends React.Component {
     if (this.state.redirect === true) {
       return <Redirect to={`/rooms/${id}`} />;
     } else {
-      return <h2>Join the game!</h2>;
+      return <h2>Game Lobby</h2>;
     }
   };
 
@@ -95,44 +143,60 @@ class RoomList extends React.Component {
         )}
       </div>
     ));
+    
+    let roomListBody = <div className="user-form">
+                        <AppBar position="static">
+                          <Tabs
+                            value={this.state.tabValue}
+                            onChange={this.handleChangeTab}
+                            variant="fullWidth"
+                            aria-label="user-login">
+                            <Tab label="Login" {...a11yProps(0)} />
+                            <Tab label="Sign up" {...a11yProps(1)} />
+                          </Tabs>
+                        </AppBar>
+                        <TabPanel value={this.state.tabValue} index={0}>
+                          <LoginFormContainer />
+                        </TabPanel>
+                        <TabPanel value={this.state.tabValue} index={1}>
+                          <SignUpForm
+                            onSubmit={this.handleSubmitUser}
+                            onChange={this.handleChangeUser}
+                            userName={this.state.userName}
+                            email={this.state.email}
+                            password={this.state.password}
+                          />
+                        </TabPanel>
+                      </div>
+    
+    if (this.props.user !== 'Anonymos') {
+      roomListBody = <div>
+                      <h3>Available Rooms:</h3>
+                      {rooms}
+                      <form onSubmit={this.handleSubmitRoom}>
+                        <h3>Create a new room:</h3>
+                        <input
+                          type="text"
+                          name="roomName"
+                          value={this.state.roomName}
+                          placeholder="room name"
+                          onChange={this.handleChangeRoom}
+                        />
+                        <button>Add</button>
+                      </form>
+                    </div>
+    }
 
     return (
       <div className="rooms">
         {this.renderRedirect(this.state.roomId)}
-        {this.props.user === "Anonymos" ? (
-          <div>
-            <SignUpForm
-              onSubmit={this.handleSubmitUser}
-              onChange={this.handleChangeUser}
-              userName={this.state.userName}
-              email={this.state.email}
-              password={this.state.password}
-            />
-            <LoginFormContainer />
-          </div>
-        ) : (
-          <div>
-            <h3>Available Rooms:</h3>
-            {rooms}
-            <form onSubmit={this.handleSubmitRoom}>
-              <h3>Create a new room:</h3>
-              <input
-                type="text"
-                name="roomName"
-                value={this.state.roomName}
-                placeholder="room name"
-                onChange={this.handleChangeRoom}
-              />
-              <button>Add</button>
-            </form>
-          </div>
-        )}
+        {roomListBody}
       </div>
     );
   }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     rooms: state.rooms,
     user: state.user
@@ -140,6 +204,6 @@ function MapStateToProps(state) {
 }
 
 export default connect(
-  MapStateToProps,
+  mapStateToProps,
   { addUser }
 )(RoomList);
