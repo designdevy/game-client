@@ -86,9 +86,12 @@ class RoomList extends React.Component {
         {room.users.length === 2 ? (
           <p>game in progress...</p>
         ) : (
-          <button value={room.id} onClick={this.handleClickJoin}>
-            Join
-          </button>
+          <div>
+            <p>Number of players in the game now: {room.users.length}</p>
+            <button value={room.id} onClick={this.handleClickJoin}>
+              Join
+            </button>
+          </div>
         )}
       </div>
     ));
