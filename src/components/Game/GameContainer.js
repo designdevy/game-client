@@ -11,14 +11,7 @@ class GameContainer extends React.Component {
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
-    console.log(
-      "value:",
-      event.target.value,
-      "userId:",
-      this.props.user.id,
-      "roomId:",
-      room.id
-    );
+
     await superagent.post(`${serverUrl}/choice`).send({
       value: event.target.value,
       userId: this.props.user.id,
