@@ -1,16 +1,30 @@
 import React from "react";
-import { allRooms } from "../actions";
 import { connect } from "react-redux";
 import superagent from "superagent";
+import { serverUrl } from './serverUrl'
+import { addUser } from '../actions'
+import { Redirect } from "react-router-dom";
+import SignUpForm from './SignUpForm'
+import LoginFormContainer from './SignUpForm/LoginFormContainer'
 
 class RoomList extends React.Component {
-  handleClick = async (event) => {
+  state = {
+    roomName: "",
+    userName: "",
+    email: "",
+    password: "",
+    redirect: false,
+    roomId: ""
+  }
+
+  handleClickJoin = async (event) => {
     event.preventDefault();
     console.log('event.target.value', event.target.value)
 
-    const serverUrl =
-      "https://polar-sands-55886.herokuapp.com" ||
-      "http://localhost:5000";
+    this.setState({
+      redirect: true,
+      roomId: event.target.value
+    })
 
     await superagent
     .put(`${serverUrl}/rooms/${event.target.value}`)
@@ -20,20 +34,86 @@ class RoomList extends React.Component {
     })
   };
 
+  handleChangeRoom = event => {
+    this.setState({
+      roomName: event.target.value
+    });
+  }
+
+  handleSubmitRoom = async (event) => {
+    event.preventDefault();
+    await superagent
+      .post(`${serverUrl}/rooms`)
+      .send({
+        name: this.state.roomName
+      })
+    this.setState({
+      roomName: ""
+    });
+  }
+
+  handleChangeUser = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleSubmitUser = async (event) => {
+    event.preventDefault();
+    await superagent
+      .post(`${serverUrl}/users`)
+      .send({
+        name: this.state.userName,
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(response => this.props.addUser(response.body))
+    this.setState({
+      userName: "",
+      email: "",
+      password: ""
+    });
+  }
+
+  renderRedirect = (id) => {
+    if (this.state.redirect === true) {
+      return <Redirect to={`/rooms/${id}`}/>
+    } else {
+      return <h2>Join the room!</h2>
+    }
+  }
+
   render() {
     const rooms = this.props.rooms.map(room => (
       <div key={room.id}>
         <p>
           {room.name} status: {room.status}
         </p>
-        <button value={room.id} onClick={this.handleClick}>Join</button>
+        <button value={room.id} onClick={this.handleClickJoin}>Join</button>
       </div>
     ));
 
     return (
       <div className="rooms">
+        {this.renderRedirect(this.state.roomId)}
         <h3>Available Rooms:</h3>
         {rooms}
+        {this.props.user === 'Anonymos' ? <div>
+        <SignUpForm 
+          onSubmit={this.handleSubmitUser} 
+          onChange={this.handleChangeUser} 
+          userName={this.state.userName}
+          email={this.state.email}
+          password={this.state.password}
+        />
+        <LoginFormContainer />
+        </div> :
+        <form onSubmit={this.handleSubmitRoom}>
+          <h3>Create a new room:</h3>
+          <input type='text' name="roomName" value={this.state.roomName} placeholder="room name" onChange={this.handleChangeRoom}/>
+          <button>Add</button>
+        </form>
+          }
       </div>
     );
   }
@@ -47,6 +127,5 @@ function MapStateToProps(state) {
 }
 
 export default connect(
-  MapStateToProps,
-  { allRooms }
+  MapStateToProps, { addUser }
 )(RoomList);
