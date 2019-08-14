@@ -1,4 +1,21 @@
 .hole-game {
   height: 700px;
-  background-color: bisque;
+  background-color: #ecf0f1;
+}
+
+.container {
+  width: 150px;
+  height: 350px;
+  background-image: linear-gradient(to bottom, #27ae60,#f1c40f,#c0392b)
+}
+
+.answer-button {
+  width: 55px;
+  height: 55px;
+  margin: 10px;
+}
+
+.figure {
+  width: 40px;
+  height: 40px;
 }
