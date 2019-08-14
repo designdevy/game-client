@@ -27,18 +27,16 @@ function Button ({ onClick, value, content }) {
   </button>
 }
 
-function History ({ round, other, previous }) {
+function History ({ round, other, previous, otherName }) {
   return round > 1
     ? <h2>
-      The other player answered {other.value} and you answered{" "}
+      {otherName} answered {other.value} and you answered{" "}
       {previous.value} in the previous round
     </h2>
     : <h2>Give your answer! Will your partner match?</h2>
 }
 
-function Choices ({ onClick, room, values, styles, other, previous }) {
-  console.log('values test:', values)
-
+function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
   return <div>
     <h3>
       Try to choose the same answer as your game partner, then you will
@@ -63,11 +61,11 @@ function Choices ({ onClick, room, values, styles, other, previous }) {
       <div className="progress-bar" style={styles} />
     </div>
 
-    <History round={room.round} other={other} previous={previous} />
+    <History round={room.round} other={other} previous={previous} otherName={otherName}/>
   </div>
 }
 
-function Content ({ room, user, onClick, values, styles, other, previous }) {
+function Content ({ room, user, onClick, values, styles, other, previous, otherName }) {
   if (room.users.length === 2) {
     if (room.stage === 10) {
       return <Victory />
@@ -91,10 +89,14 @@ function Content ({ room, user, onClick, values, styles, other, previous }) {
       styles={styles}
       other={other}
       previous={previous}
+      otherName={otherName}
     />
   }
     
-  return <Waiting on="other player to join" />
+  return <div>
+    <h2>Hello {user.name}!</h2>
+    <Waiting on="other player to join" />
+  </div>
 }
 
 export default function GameDisplay(props) {
@@ -107,6 +109,14 @@ export default function GameDisplay(props) {
     choice =>
       choice.round === props.room.round - 1 && choice.userId !== props.user.id
   );
+
+  const otherUser = props.room.users.find(
+    user =>
+      user.id !== props.user.id
+  ) ? props.room.users.find(
+    user =>
+      user.id !== props.user.id
+  ).name : "Anonymos";
 
   let height = 350 - parseInt(props.room.stage) * 35;
 
@@ -128,6 +138,7 @@ export default function GameDisplay(props) {
         styles={styles}
         other={otherAnswer}
         previous={previousAnswer}
+        otherName={otherUser}
       />
 
       <button onClick={props.quitGame}>Quit the game</button>
