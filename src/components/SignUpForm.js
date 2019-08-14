@@ -35,9 +35,9 @@ export default class SignUpForm extends React.Component {
         </Grid>
         <Grid item xs={12}>
           <FormControl>
-            <InputLabel htmlFor="password">Password</InputLabel>
+            <InputLabel htmlFor="signUpPassword">Password</InputLabel>
             <Input
-            id="password"
+            id="signUpPassword"
             type="password"
             name="password"
             value={this.props.password}

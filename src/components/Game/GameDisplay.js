@@ -19,12 +19,12 @@ export default function GameDisplay(props) {
         props.room.stage === 10 ? (
           <div>
             <h2>Congratulations! You are a wonderful team!</h2>
-            <button onClick={props.restartGame}>Play once again</button>
+            <button onClick={props.quitGame}>Choose the new game</button>
           </div>
         ) : props.room.stage === 0 ? (
           <div>
             <h2>You loose... Try one more time</h2>
-            <button onClick={props.restartGame}>Play once again</button>
+            <button onClick={props.quitGame}>Choose the new game</button>
           </div>
         ) : (
           <div>
