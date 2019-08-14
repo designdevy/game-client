@@ -36,7 +36,6 @@ class GameContainer extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect === true) {
-      console.log('I was called!!!')
       return <Redirect to={'/'} />;
     } else {
       return <div/>;
