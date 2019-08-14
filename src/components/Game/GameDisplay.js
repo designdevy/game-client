@@ -93,7 +93,10 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
     />
   }
     
-  return <Waiting on="other player to join" />
+  return <div>
+    <h2>Hello {user.name}!</h2>
+    <Waiting on="other player to join" />
+  </div>
 }
 
 export default function GameDisplay(props) {
@@ -110,7 +113,10 @@ export default function GameDisplay(props) {
   const otherUser = props.room.users.find(
     user =>
       user.id !== props.user.id
-  );
+  ) ? props.room.users.find(
+    user =>
+      user.id !== props.user.id
+  ).name : "Anonymos";
 
   let height = 350 - parseInt(props.room.stage) * 35;
 
@@ -132,7 +138,7 @@ export default function GameDisplay(props) {
         styles={styles}
         other={otherAnswer}
         previous={previousAnswer}
-        otherName={otherUser.name}
+        otherName={otherUser}
       />
 
       <button onClick={props.quitGame}>Quit the game</button>
