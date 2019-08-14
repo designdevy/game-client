@@ -15,8 +15,6 @@ class GameContainer extends React.Component {
   handleChoice = async event => {
     event.preventDefault();
 
-    console.log("event.target.value", event.currentTarget.value);
-
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
