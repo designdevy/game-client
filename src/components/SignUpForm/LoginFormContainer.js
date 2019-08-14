@@ -29,7 +29,8 @@ class LoginFormContainer extends React.Component {
     onSubmit={this.handleSubmitUser} 
     onChange={this.handleChangeUser} 
     userName={this.state.name}
-    password={this.state.password}/>
+    password={this.state.password}
+    />
   }
 }
 

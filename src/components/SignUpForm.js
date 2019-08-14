@@ -1,31 +1,56 @@
-import React from 'react';
+import React from 'react'
+import Grid from '@material-ui/core/Grid'
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 
 export default class SignUpForm extends React.Component {
   render() {
     return <form onSubmit={this.props.onSubmit}>
-      <h3>Sign up:</h3>
-      <input
-        type="text"
-        name="userName"
-        value={this.props.userName}
-        placeholder="name"
-        onChange={this.props.onChange}
-      />
-      <input
-        type="text"
-        name="email"
-        value={this.props.email}
-        placeholder="e-mail"
-        onChange={this.props.onChange}
-      />
-      <input
-        type="password"
-        name="password"
-        value={this.props.password}
-        placeholder="password"
-        onChange={this.props.onChange}
-      />
-      <button>Add</button>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <FormControl>
+            <InputLabel htmlFor="name">Name</InputLabel>
+            <Input
+            id="name"
+            type="text"
+            name="userName"
+            value={this.props.userName}
+            onChange={this.props.onChange}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input
+            id="email"
+            type="text"
+            name="email"
+            value={this.props.email}
+            onChange={this.props.onChange}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input
+            id="password"
+            type="password"
+            name="password"
+            value={this.props.password}
+            onChange={this.props.onChange}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <Button type="submit" variant="contained" color="primary">
+            Sign up
+          </Button>
+        </Grid>
+      </Grid>
     </form>;
   }
 }
