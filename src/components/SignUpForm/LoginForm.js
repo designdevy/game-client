@@ -21,7 +21,7 @@ export default function LogInForm (props) {
               <Input
               id="userName"
               type="text"
-              name="userName"
+              name="name"
               value={props.userName}
               onChange={props.onChange}
               />
