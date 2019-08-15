@@ -110,7 +110,6 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
   }
 
   if (room.users.length === 1 && room.stage !== 5 && room.stage !== 10 && room.stage !== 0) {
-    console.log('room.stage', room.stage)
     return <Left />
   }
     
