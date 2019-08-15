@@ -151,7 +151,7 @@ class RoomList extends React.Component {
     if (this.state.redirect === true) {
       return <Redirect to={`/rooms/${id}`} />;
     } else {
-      return <h1 className="game-title">ME-YOU</h1>;
+      return <h1 className="game-title">ME+YOU</h1>;
     }
   };
 
