@@ -4,6 +4,7 @@ import superagent from "superagent";
 import { serverUrl } from "./serverUrl";
 import { addUser } from "../actions";
 import { Redirect } from "react-router-dom";
+import gameTypes from './Game/gameTypes'
 import SignUpForm from "./SignUpForm";
 // import Tutorial from "./Game/"
 import LoginFormContainer from "./SignUpForm/LoginFormContainer";
@@ -161,7 +162,7 @@ class RoomList extends React.Component {
               {room.users.length === 2 || room.stage !== 5
                 ? <p>game in progress...</p> 
                   : <div>
-                      <p>Number of players in the game now: {room.users.length}</p>
+                      <p>Game type: <b>{gameTypes(room.type)}</b>. Number of players in the game now: <b>{room.users.length}</b></p>
                       <button
                         className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
                         variant="contained"
