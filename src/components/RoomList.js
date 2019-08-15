@@ -57,6 +57,7 @@ class RoomList extends React.Component {
   state = {
     roomName: "",
     userName: "",
+    type: 1,
     email: "",
     password: "",
     redirect: false,
@@ -87,14 +88,15 @@ class RoomList extends React.Component {
 
   handleChangeRoom = event => {
     this.setState({
-      roomName: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
   handleSubmitRoom = async event => {
     event.preventDefault();
     await superagent.post(`${serverUrl}/rooms`).send({
-      name: this.state.roomName
+      name: this.state.roomName,
+      type: this.state.type
     });
     this.setState({
       roomName: ""

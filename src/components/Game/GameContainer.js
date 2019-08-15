@@ -20,6 +20,7 @@ class GameContainer extends React.Component {
     );
 
     this.setState(switchValues(room.type))
+    console.log('this.state.values', this.state.values)
   }
 
   handleChoice = async event => {
