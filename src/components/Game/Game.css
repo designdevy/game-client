@@ -82,3 +82,12 @@ body {
 .left-img {
   max-width: 250px;
 }
+
+.your-answer {
+  font-size: 4em;
+  display: inline;
+}
+
+.others-answer {
+  font-size: 4em;
+}

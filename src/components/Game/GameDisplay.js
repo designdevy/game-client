@@ -2,6 +2,8 @@ import React from "react";
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 import "./Game.css";
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 function Victory () {
   const { width, height } = useWindowSize()
@@ -32,7 +34,7 @@ function Left () {
   </div>
 }
 
-function Button ({ onClick, value, content }) {
+function Btn ({ onClick, value, content }) {
   return <button
     className="answer-button"
     value={value}
@@ -47,11 +49,17 @@ function History ({ other, previous, otherName, values }) {
   const partnersAnswer = values[parseInt(other.value) - 1]
 
   return <div>
-      <h2 className="game-text">You answered:</h2>
-      <div>{yourAnswer}</div>
-      <h2 className="game-text">{otherName} answered:</h2>
-      <div>{partnersAnswer}</div>
-    </div>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <h2 className="game-text">You answered:</h2>
+            <div className="your-answer">{yourAnswer}</div>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <h2 className="game-text">{otherName} answered:</h2>
+            <div className="others-answer">{partnersAnswer}</div>
+          </Grid>
+        </Grid>
+        </div>
 }
 
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
@@ -64,11 +72,11 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
     <h2 className="game-text">Choose your answer:</h2>
 
     <div className="answers-container">
-      <Button value="1" content={values[0]} onClick={onClick} />
-      <Button value="2" content={values[1]} onClick={onClick} />
-      <Button value="3" content={values[2]} onClick={onClick} />
-      <Button value="4" content={values[3]} onClick={onClick} />
-      <Button value="5" content={values[4]} onClick={onClick} />
+      <Btn value="1" content={values[0]} onClick={onClick} />
+      <Btn value="2" content={values[1]} onClick={onClick} />
+      <Btn value="3" content={values[2]} onClick={onClick} />
+      <Btn value="4" content={values[3]} onClick={onClick} />
+      <Btn value="5" content={values[4]} onClick={onClick} />
     </div>
 
     {room.round > 1
@@ -169,8 +177,8 @@ export default function GameDisplay(props) {
         previous={previousAnswer}
         otherName={otherUser}
       />
-
-      <button onClick={props.quitGame}>Quit the game</button>
+      <br/>
+      <Button variant="contained" color="primary" onClick={props.quitGame}>Quit the game</Button>
     </div>
   );
 }

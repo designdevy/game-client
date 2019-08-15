@@ -5,18 +5,20 @@ import { serverUrl } from "./serverUrl";
 import { addUser } from "../actions";
 import { Redirect } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
+// import Tutorial from "./Game/"
 import LoginFormContainer from "./SignUpForm/LoginFormContainer";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
 import { Paper } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,33 +42,33 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `user-login-${index}`,
-    "aria-controls": `user-loginpanel-${index}`
+    'aria-controls': `user-loginpanel-${index}`,
   };
 }
+
 
 class RoomList extends React.Component {
   state = {
     roomName: "",
-    type: 1,
     userName: "",
     email: "",
     password: "",
     redirect: false,
     roomId: "",
-    tabValue: 0
+    tabValue: 0,
   };
 
   handleChangeTab = (event, newValue) => {
     this.setState({
       tabValue: newValue
     });
-  };
+  }
 
   handleClickJoin = async event => {
     event.preventDefault();
@@ -85,15 +87,14 @@ class RoomList extends React.Component {
 
   handleChangeRoom = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      roomName: event.target.value
     });
   };
 
   handleSubmitRoom = async event => {
     event.preventDefault();
     await superagent.post(`${serverUrl}/rooms`).send({
-      name: this.state.roomName,
-      type: this.state.type
+      name: this.state.roomName
     });
     this.setState({
       roomName: ""
@@ -146,10 +147,9 @@ class RoomList extends React.Component {
                   <button
                     className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
                     variant="contained"
-                    color="primary"
+                    color="primary" 
                     value={room.id}
-                    onClick={this.handleClickJoin}
-                  >
+                    onClick={this.handleClickJoin}>
                     Join
                   </button>
                 </div>
@@ -159,7 +159,6 @@ class RoomList extends React.Component {
         </Grid>
       </div>
     ));
-
     let roomListBody = (
       <div className="user-form">
         <Grid container justify="center" spacing={10}>
