@@ -162,7 +162,7 @@ class RoomList extends React.Component {
               {room.users.length === 2 || room.stage !== 5
                 ? <p>game in progress...</p> 
                   : <div>
-                      <p>Game type: <b>{gameTypes(room.type)}</b>. Number of players in the game now: <b>{room.users.length}</b></p>
+                      <p>Game type: <b>{gameTypes(room.type)}</b>. Players in the room: <b>{room.users.length}</b></p>
                       <button
                         className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
                         variant="contained"
