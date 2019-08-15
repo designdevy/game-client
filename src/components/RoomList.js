@@ -55,11 +55,11 @@ function a11yProps(index) {
 
 class RoomList extends React.Component {
   state = {
-    roomName: null,
-    userName: null,
+    roomName: '',
+    userName: '',
     type: 1,
-    email: null,
-    password: null,
+    email: '',
+    password: '',
     redirect: false,
     roomId: "",
     tabValue: 0,
@@ -73,7 +73,6 @@ class RoomList extends React.Component {
 
   handleClickJoin = async event => {
     event.preventDefault();
-    console.log("event.target.value", event.target.value);
 
     this.setState({
       redirect: true,
@@ -94,8 +93,13 @@ class RoomList extends React.Component {
 
   handleSubmitRoom = async event => {
     event.preventDefault();
+
+    const roomName = this.state.roomName === ''
+      ? null
+      : this.state.roomName
+
     await superagent.post(`${serverUrl}/rooms`).send({
-      name: this.state.roomName,
+      name: roomName,
       type: this.state.type
     });
     this.setState({
@@ -111,12 +115,25 @@ class RoomList extends React.Component {
 
   handleSubmitUser = async event => {
     event.preventDefault();
+
+    const name = this.state.userName === ''
+      ? null
+      : this.state.userName
+    
+    const email = this.state.email === ''
+      ? null
+      : this.state.email
+    
+    const password = this.state.password === ''
+      ? null
+      : this.state.password
+
     await superagent
       .post(`${serverUrl}/users`)
       .send({
-        name: this.state.userName,
-        email: this.state.email,
-        password: this.state.password
+        name,
+        email,
+        password
       })
       .then(response => this.props.addUser(response.body));
     this.setState({
