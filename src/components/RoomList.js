@@ -189,10 +189,14 @@ class RoomList extends React.Component {
                       </div>
     
     if (this.props.user !== 'Anonymos') {
+      console.log('this.props.user', this.props.user)
       roomListBody = <div>
                       <Grid container justify="center" spacing={10}>
                         <Grid item xs={12} sm={12} md={8} lg={8}>
                           <Paper className="game-lobby">
+                            <h2>Name: {this.props.user.name}</h2>
+                            <h2>Games won: {this.props.user.won}</h2>
+                            <h2>Games failed: {this.props.user.failed}</h2>
                             <form onSubmit={this.handleSubmitRoom}>
                               <h2>Create a new room</h2>
                               <TextField
