@@ -159,66 +159,81 @@ class RoomList extends React.Component {
         </Grid>
       </div>
     ));
-    
-    let roomListBody = <div className="user-form">
-                      <Grid container justify="center" spacing={10}>
-                        <Grid item xs={12} sm={8} md={6} lg={4}>
-                          <AppBar position="static">
-                            <Tabs
-                              value={this.state.tabValue}
-                              onChange={this.handleChangeTab}
-                              variant="fullWidth"
-                              aria-label="user-login">
-                              <Tab label="Login" {...a11yProps(0)} />
-                              <Tab label="Sign up" {...a11yProps(1)} />
-                            </Tabs>
-                          </AppBar>
-                          <TabPanel value={this.state.tabValue} index={0}>
-                            <LoginFormContainer />
-                          </TabPanel>
-                          <TabPanel value={this.state.tabValue} index={1}>
-                            <SignUpForm
-                              onSubmit={this.handleSubmitUser}
-                              onChange={this.handleChangeUser}
-                              userName={this.state.userName}
-                              email={this.state.email}
-                              password={this.state.password}
-                            />
-                          </TabPanel>
-                        </Grid>
-                      </Grid>
-                      </div>
-    
-    if (this.props.user !== 'Anonymos') {
-      roomListBody = <div>
-                      <Grid container justify="center" spacing={10}>
-                        <Grid item xs={12} sm={12} md={8} lg={8}>
-                          <Paper className="game-lobby">
-                            <form onSubmit={this.handleSubmitRoom}>
-                              <h2>Create a new room</h2>
-                              <TextField
-                                id="outlined-name"
-                                label="Room name"
-                                name="roomName"
-                                value={this.state.roomName}
-                                onChange={this.handleChangeRoom}
-                                margin="normal"
-                                variant="outlined"
-                              />
-                              <Button
-                                type="submit"
-                                className="add-room-btn"
-                                variant="contained"
-                                color="primary">
-                                Add
-                              </Button>
-                            </form>
-                            <h2>Available Rooms</h2>
-                            {rooms}
-                          </Paper>
-                        </Grid>
-                      </Grid>
-                    </div>
+    let roomListBody = (
+      <div className="user-form">
+        <Grid container justify="center" spacing={10}>
+          <Grid item xs={12} sm={8} md={6} lg={4}>
+            <AppBar position="static">
+              <Tabs
+                value={this.state.tabValue}
+                onChange={this.handleChangeTab}
+                variant="fullWidth"
+                aria-label="user-login"
+              >
+                <Tab label="Login" {...a11yProps(0)} />
+                <Tab label="Sign up" {...a11yProps(1)} />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={this.state.tabValue} index={0}>
+              <LoginFormContainer />
+            </TabPanel>
+            <TabPanel value={this.state.tabValue} index={1}>
+              <SignUpForm
+                onSubmit={this.handleSubmitUser}
+                onChange={this.handleChangeUser}
+                userName={this.state.userName}
+                email={this.state.email}
+                password={this.state.password}
+              />
+            </TabPanel>
+          </Grid>
+        </Grid>
+      </div>
+    );
+
+    if (this.props.user !== "Anonymos") {
+      console.log("this.props.user", this.props.user);
+      roomListBody = (
+        <div>
+          <Grid container justify="center" spacing={10}>
+            <Grid item xs={12} sm={12} md={8} lg={8}>
+              <Paper className="game-lobby">
+                <h2>Name: {this.props.user.name}</h2>
+                <h2>Games won: {this.props.user.won}</h2>
+                <h2>Games failed: {this.props.user.failed}</h2>
+                <form onSubmit={this.handleSubmitRoom}>
+                  <h2>Create a new room</h2>
+                  <TextField
+                    id="outlined-name"
+                    label="Room name"
+                    name="roomName"
+                    value={this.state.roomName}
+                    onChange={this.handleChangeRoom}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <select name="type" onChange={this.handleChangeRoom}>
+                    <option value="1">Numbers</option>
+                    <option value="2">Shapes</option>
+                    <option value="3">Emoji</option>
+                    <option value="4">Colors</option>
+                  </select>
+                  <Button
+                    type="submit"
+                    className="add-room-btn"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Add
+                  </Button>
+                </form>
+                <h2>Available Rooms</h2>
+                {rooms}
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+      );
     }
 
     return (

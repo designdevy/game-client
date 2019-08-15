@@ -1,10 +1,17 @@
 import React from "react";
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 import "./Game.css";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 function Victory () {
+  const { width, height } = useWindowSize()
   return <div>
+    <Confetti
+      width={width}
+      height={height}
+    />
     <h2>Congratulations! You are a wonderful team!</h2>
   </div>
 }
