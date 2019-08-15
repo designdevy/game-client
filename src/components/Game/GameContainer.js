@@ -15,10 +15,6 @@ class GameContainer extends React.Component {
   };
 
   componentDidMount () {
-    if (!this.props.room) {
-      return <Redirect to={'/'} />;
-    }
-
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
@@ -82,10 +78,6 @@ class GameContainer extends React.Component {
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
-
-    if (!this.props.room) {
-      return <Redirect to={'/'} />;
-    }
 
     return (
       <div>
