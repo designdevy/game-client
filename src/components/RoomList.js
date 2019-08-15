@@ -216,8 +216,7 @@ class RoomList extends React.Component {
                   <select name="type" onChange={this.handleChangeRoom}>
                     <option value="1">Numbers</option>
                     <option value="2">Shapes</option>
-                    <option value="3">Colors</option>
-                    <option value="4">Words</option>
+                    <option value="3">Emoji</option>
                   </select>
                   <Button
                     type="submit"
