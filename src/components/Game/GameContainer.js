@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import superagent from "superagent";
 import { serverUrl } from "../serverUrl";
 import { withRouter, Redirect } from "react-router-dom";
+import { addUser } from "../../actions";
 import "./Game.css";
 
 class GameContainer extends React.Component {
@@ -68,12 +69,26 @@ class GameContainer extends React.Component {
     this.setState({ 
       redirect: true
     });
+
+    const room = this.props.rooms.find(
+      room => parseInt(room.id) === parseInt(this.props.match.params.id)
+    );
+
+    const won = room.stage === 10 ? (parseInt(this.props.user.won) + 1) : parseInt(this.props.user.won)
+    const failed = room.stage === 0 ? (parseInt(this.props.user.failed) + 1) : parseInt(this.props.user.failed)
+
     await superagent
       .put(`${serverUrl}/users/${this.props.user.id}`)
       .send({
         roomId: this.props.match.params.id,
-        userId: this.props.user.id
+        userId: this.props.user.id,
+        won,
+        failed
     });
+
+    await superagent
+      .get(`${serverUrl}/users/${this.props.user.id}`)
+      .then(response => this.props.addUser(response.body));
   };
 
   renderRedirect = () => {
@@ -110,4 +125,4 @@ function MapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(MapStateToProps)(GameContainer));
+export default withRouter(connect(MapStateToProps, { addUser })(GameContainer));
