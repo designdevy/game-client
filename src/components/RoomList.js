@@ -55,11 +55,11 @@ function a11yProps(index) {
 
 class RoomList extends React.Component {
   state = {
-    roomName: "",
-    userName: "",
+    roomName: null,
+    userName: null,
     type: 1,
-    email: "",
-    password: "",
+    email: null,
+    password: null,
     redirect: false,
     roomId: "",
     tabValue: 0,
