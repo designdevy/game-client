@@ -141,21 +141,20 @@ class RoomList extends React.Component {
           <Grid item xs={12} sm={8} md={10} lg={10}>
             <Paper className="room-item">
               <h3>{room.name}</h3>
-              {room.users.length === 2 ? (
-                <p>game in progress...</p>
-              ) : (
-                <div>
-                  <p>Number of players in the game now: {room.users.length}</p>
-                  <button
-                    className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
-                    variant="contained"
-                    color="primary" 
-                    value={room.id}
-                    onClick={this.handleClickJoin}>
-                    Join
-                  </button>
-                </div>
-              )}
+              {room.users.length === 2 || room.stage !== 5
+                ? <p>game in progress...</p> 
+                  : <div>
+                      <p>Number of players in the game now: {room.users.length}</p>
+                      <button
+                        className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
+                        variant="contained"
+                        color="primary" 
+                        value={room.id}
+                        onClick={this.handleClickJoin}>
+                        Join
+                      </button>
+                    </div>
+              }
             </Paper>
           </Grid>
         </Grid>
