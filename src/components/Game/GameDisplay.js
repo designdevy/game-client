@@ -18,6 +18,13 @@ function Waiting ({ on }) {
   return <h3 className="game-text">Waiting for the {on}.</h3>
 }
 
+function Left () {
+  return <div>
+    <h3 className="game-text">Your partner left the game</h3>
+    <img className="left-img" alt="left" src="https://www.sccpre.cat/mypng/full/56-560673_forever-alone-meme-shaped-sticker-unixstickers-png-transparent.png" />
+  </div>
+}
+
 function Button ({ onClick, value, content }) {
   return <button
     className="answer-button"
@@ -28,13 +35,16 @@ function Button ({ onClick, value, content }) {
   </button>
 }
 
-function History ({ round, other, previous, otherName }) {
-  return round > 1
-    ? <h2 className="game-text">
-      {otherName} answered {other.value} and you answered{" "}
-      {previous.value} in the previous round
-    </h2>
-    : <h2 className="game-text">Give your answer! Will your partner match?</h2>
+function History ({ other, previous, otherName, values }) {
+  const yourAnswer = values[parseInt(previous.value) - 1]
+  const partnersAnswer = values[parseInt(other.value) - 1]
+
+  return <div>
+      <h2 className="game-text">You answered:</h2>
+      <div>{yourAnswer}</div>
+      <h2 className="game-text">{otherName} answered:</h2>
+      <div>{partnersAnswer}</div>
+    </div>
 }
 
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
@@ -54,15 +64,17 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
       <Button value="5" content={values[4]} onClick={onClick} />
     </div>
 
-    <h2 className="game-text">Your level is {room.stage}</h2>
+    {room.round > 1
+    ? <History other={other} previous={previous} otherName={otherName} values={values}/>
+    : <h2 className="game-text">Give your answer! Will your partner match?</h2>}
 
-    <h2 className="game-text">It's round #{room.round}</h2>
+    <h2 className="game-text">Your level is {room.stage}</h2>
 
     <div className="bar-container">
       <div className="progress-bar" style={styles} />
-    </div>
+    </div> 
 
-    <History round={room.round} other={other} previous={previous} otherName={otherName}/>
+    <h2 className="game-text">It's round #{room.round}</h2>
   </div>
 }
 
@@ -95,6 +107,11 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
       previous={previous}
       otherName={otherName}
     />
+  }
+
+  if (room.users.length === 1 && room.stage !== 5 && room.stage !== 10 && room.stage !== 0) {
+    console.log('room.stage', room.stage)
+    return <Left />
   }
     
   return <div>

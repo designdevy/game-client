@@ -19,10 +19,12 @@ class GameContainer extends React.Component {
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
 
-    await superagent.post(`${serverUrl}/choice`).send({
-      value: event.currentTarget.value,
-      userId: this.props.user.id,
-      roomId: room.id
+    await superagent
+      .post(`${serverUrl}/choice`)
+      .send({
+        value: event.currentTarget.value,
+        userId: this.props.user.id,
+        roomId: room.id
     });
 
     if (parseInt(room.stage) >= 7) {
@@ -63,10 +65,14 @@ class GameContainer extends React.Component {
   // remove the user to the current room, if user quit the game
   quitGame = async event => {
     event.preventDefault();
-    this.setState({ redirect: true });
-    await superagent.put(`${serverUrl}/users/${this.props.user.id}`).send({
-      roomId: this.props.match.params.id,
-      userId: this.props.user.id
+    this.setState({ 
+      redirect: true
+    });
+    await superagent
+      .put(`${serverUrl}/users/${this.props.user.id}`)
+      .send({
+        roomId: this.props.match.params.id,
+        userId: this.props.user.id
     });
   };
 
