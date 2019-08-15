@@ -13,13 +13,14 @@ function Victory () {
       height={height}
     />
     <h2>Congratulations! You are a wonderful team!</h2>
+    <img alt="win" src="https://thumbs.gfycat.com/QuickSaltyCottontail.webp" />
   </div>
 }
 
 function Failure () {
   return <div>
     <h2 className="game-text">You lose... Try one more time</h2>
-    <img alt="lose" src="https://www.sccpre.cat/mypng/full/56-560673_forever-alone-meme-shaped-sticker-unixstickers-png-transparent.png" />
+    <img alt="lose" src="https://media.tenor.com/images/64447af076fd4f692790601de9c710f3/tenor.gif" />
   </div>
 }
 

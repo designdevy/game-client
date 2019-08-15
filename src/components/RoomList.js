@@ -161,6 +161,7 @@ class RoomList extends React.Component {
         </Grid>
       </div>
     ));
+
     let roomListBody = (
       <div className="user-form">
         <Grid container justify="center" spacing={10}>
