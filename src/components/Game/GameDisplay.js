@@ -1,5 +1,6 @@
 import React from "react";
 import "./Game.css";
+import Button from '@material-ui/core/Button';
 
 function Victory () {
   return <div>
@@ -25,7 +26,7 @@ function Left () {
   </div>
 }
 
-function Button ({ onClick, value, content }) {
+function Btn ({ onClick, value, content }) {
   return <button
     className="answer-button"
     value={value}
@@ -57,11 +58,11 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
     <h2 className="game-text">Choose your answer:</h2>
 
     <div className="answers-container">
-      <Button value="1" content={values[0]} onClick={onClick} />
-      <Button value="2" content={values[1]} onClick={onClick} />
-      <Button value="3" content={values[2]} onClick={onClick} />
-      <Button value="4" content={values[3]} onClick={onClick} />
-      <Button value="5" content={values[4]} onClick={onClick} />
+      <Btn value="1" content={values[0]} onClick={onClick} />
+      <Btn value="2" content={values[1]} onClick={onClick} />
+      <Btn value="3" content={values[2]} onClick={onClick} />
+      <Btn value="4" content={values[3]} onClick={onClick} />
+      <Btn value="5" content={values[4]} onClick={onClick} />
     </div>
 
     {room.round > 1
@@ -162,8 +163,8 @@ export default function GameDisplay(props) {
         previous={previousAnswer}
         otherName={otherUser}
       />
-
-      <button onClick={props.quitGame}>Quit the game</button>
+      <br/>
+      <Button variant="contained" color="primary" onClick={props.quitGame}>Quit the game</Button>
     </div>
   );
 }
