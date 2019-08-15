@@ -4,6 +4,7 @@ import superagent from "superagent";
 import { serverUrl } from "./serverUrl";
 import { addUser } from "../actions";
 import { Redirect } from "react-router-dom";
+import gameTypes from './Game/gameTypes'
 import SignUpForm from "./SignUpForm";
 // import Tutorial from "./Game/"
 import LoginFormContainer from "./SignUpForm/LoginFormContainer";
@@ -55,11 +56,11 @@ function a11yProps(index) {
 
 class RoomList extends React.Component {
   state = {
-    roomName: "",
-    userName: "",
+    roomName: '',
+    userName: '',
     type: 1,
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     redirect: false,
     roomId: "",
     tabValue: 0,
@@ -73,7 +74,6 @@ class RoomList extends React.Component {
 
   handleClickJoin = async event => {
     event.preventDefault();
-    console.log("event.target.value", event.target.value);
 
     this.setState({
       redirect: true,
@@ -94,8 +94,13 @@ class RoomList extends React.Component {
 
   handleSubmitRoom = async event => {
     event.preventDefault();
+
+    const roomName = this.state.roomName === ''
+      ? null
+      : this.state.roomName
+
     await superagent.post(`${serverUrl}/rooms`).send({
-      name: this.state.roomName,
+      name: roomName,
       type: this.state.type
     });
     this.setState({
@@ -111,12 +116,25 @@ class RoomList extends React.Component {
 
   handleSubmitUser = async event => {
     event.preventDefault();
+
+    const name = this.state.userName === ''
+      ? null
+      : this.state.userName
+    
+    const email = this.state.email === ''
+      ? null
+      : this.state.email
+    
+    const password = this.state.password === ''
+      ? null
+      : this.state.password
+
     await superagent
       .post(`${serverUrl}/users`)
       .send({
-        name: this.state.userName,
-        email: this.state.email,
-        password: this.state.password
+        name,
+        email,
+        password
       })
       .then(response => this.props.addUser(response.body));
     this.setState({
@@ -141,21 +159,20 @@ class RoomList extends React.Component {
           <Grid item xs={12} sm={8} md={10} lg={10}>
             <Paper className="room-item">
               <h3>{room.name}</h3>
-              {room.users.length === 2 ? (
-                <p>game in progress...</p>
-              ) : (
-                <div>
-                  <p>Number of players in the game now: {room.users.length}</p>
-                  <button
-                    className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
-                    variant="contained"
-                    color="primary" 
-                    value={room.id}
-                    onClick={this.handleClickJoin}>
-                    Join
-                  </button>
-                </div>
-              )}
+              {room.users.length === 2 || room.stage !== 5
+                ? <p>game in progress...</p> 
+                  : <div>
+                      <p>Game type: <b>{gameTypes(room.type)}</b>. Players in the room: <b>{room.users.length}</b></p>
+                      <button
+                        className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
+                        variant="contained"
+                        color="primary" 
+                        value={room.id}
+                        onClick={this.handleClickJoin}>
+                        Join
+                      </button>
+                    </div>
+              }
             </Paper>
           </Grid>
         </Grid>

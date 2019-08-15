@@ -95,8 +95,7 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
 }
 
 function Content ({ room, user, onClick, values, styles, other, previous, otherName }) {
-  console.log('in Game display: values:', values)
-  
+ 
   if (room.stage === 10) {
     return <Victory />
   } 

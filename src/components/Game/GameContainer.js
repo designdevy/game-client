@@ -20,7 +20,6 @@ class GameContainer extends React.Component {
     );
 
     this.setState(switchValues(room.type))
-    console.log('this.state.values', this.state.values)
   }
 
   handleChoice = async event => {
@@ -79,6 +78,7 @@ class GameContainer extends React.Component {
     const room = this.props.rooms.find(
       room => parseInt(room.id) === parseInt(this.props.match.params.id)
     );
+
     return (
       <div>
         <GameDisplay
