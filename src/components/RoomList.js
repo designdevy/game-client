@@ -217,6 +217,7 @@ class RoomList extends React.Component {
                     <option value="1">Numbers</option>
                     <option value="2">Shapes</option>
                     <option value="3">Emoji</option>
+                    <option value="4">Colors</option>
                   </select>
                   <Button
                     type="submit"
