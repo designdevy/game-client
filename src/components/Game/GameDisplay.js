@@ -1,6 +1,7 @@
 import React from "react";
 import "./Game.css";
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 function Victory () {
   return <div>
@@ -41,11 +42,17 @@ function History ({ other, previous, otherName, values }) {
   const partnersAnswer = values[parseInt(other.value) - 1]
 
   return <div>
-      <h2 className="game-text">You answered:</h2>
-      <div>{yourAnswer}</div>
-      <h2 className="game-text">{otherName} answered:</h2>
-      <div>{partnersAnswer}</div>
-    </div>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <h2 className="game-text">You answered:</h2>
+            <div className="your-answer">{yourAnswer}</div>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <h2 className="game-text">{otherName} answered:</h2>
+            <div className="others-answer">{partnersAnswer}</div>
+          </Grid>
+        </Grid>
+        </div>
 }
 
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
