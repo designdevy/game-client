@@ -12,7 +12,7 @@ function Victory () {
       width={width}
       height={height}
     />
-    <h2>Congratulations! You are a wonderful team!</h2>
+    <h2 className="game-text">Congratulations! You are a wonderful team!</h2>
     <img alt="win" src="https://thumbs.gfycat.com/QuickSaltyCottontail.webp" />
   </div>
 }
@@ -36,12 +36,16 @@ function Left () {
 }
 
 function Btn ({ onClick, value, content }) {
+  let buttonContent = content
+  if (typeof content === "number") {
+    buttonContent = <span className="number-choice">{content}</span>
+  }
   return <button
     className="answer-button"
     value={value}
     onClick={onClick}
   >
-    {content}
+    {buttonContent}
   </button>
 }
 
@@ -63,7 +67,32 @@ function History ({ other, previous, otherName, values }) {
         </div>
 }
 
+function YourHistory ({ previous, values, room}) {
+  let yourAnswer = values[parseInt(previous.value) - 1]
+  if (room.type === 1) {
+    yourAnswer = <span className="number-choice-selected">{values[parseInt(previous.value) - 1]}</span>
+  }
+
+  return <div>
+    <h2 className="game-text">You answered:</h2>
+    <div className="your-answer">{yourAnswer}</div>
+  </div>
+}
+
+function PartnerHistory ({ other, otherName, values, room}) {
+  let partnersAnswer = values[parseInt(other.value) - 1]
+  if (room.type === 1) {
+    partnersAnswer = <span className="number-choice-selected">{values[parseInt(other.value) - 1]}</span>
+  }
+  
+  return <div>
+    <h2 className="game-text">{otherName} answered:</h2>
+    <div className="others-answer">{partnersAnswer}</div>
+  </div>
+}
+
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
+  const gridBarContainerSize = room.round > 1 ? 4 : 12
   return <div>
     <h3 className="game-text">
       Try to choose the same answer as your game partner,<br/>then you will
@@ -80,16 +109,31 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
       <Btn value="5" content={values[4]} onClick={onClick} />
     </div>
 
-    {room.round > 1
-    ? <History other={other} previous={previous} otherName={otherName} values={values}/>
-    : <h2 className="game-text">Give your answer! Will your partner match?</h2>}
+    {room.round === 1
+    ? <h2 className="game-text">Give your answer! Will your partner match?</h2>
+    : null}
 
-    <h2 className="game-text">Your level is {room.stage}</h2>
+    <Grid container spacing={3}>
+      {room.round > 1
+      ? <Grid item xs={4} sm={4}>
+          <YourHistory previous={previous} values={values} room={room} />
+        </Grid>
+      : null}
 
-    <div className="bar-container">
-      <div className="progress-bar" style={styles} />
-    </div> 
-
+      <Grid item xs={gridBarContainerSize} sm={gridBarContainerSize}>
+        <h2 className="game-text">Your level is {room.stage}</h2>
+        <div className="bar-container">
+          <div className="progress-bar" style={styles} />
+        </div>
+      </Grid>
+    
+      {room.round > 1
+      ? <Grid item xs={4} sm={4}>
+          <PartnerHistory other={other} otherName={otherName} values={values} room={room}/>
+        </Grid>
+      : null}
+    </Grid>
+    
     <h2 className="game-text">It's round #{room.round}</h2>
   </div>
 }
@@ -180,7 +224,7 @@ export default function GameDisplay(props) {
         otherName={otherUser}
       />
       <br/>
-      <Button variant="contained" color="primary" onClick={props.quitGame}>Quit the game</Button>
+      <Button className="quiter-btn" variant="contained" color="primary" onClick={props.quitGame}>Quit the game</Button>
     </div>
   );
 }

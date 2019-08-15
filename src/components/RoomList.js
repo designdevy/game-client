@@ -19,7 +19,10 @@ import Grid from '@material-ui/core/Grid';
 import { Paper } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -148,7 +151,7 @@ class RoomList extends React.Component {
     if (this.state.redirect === true) {
       return <Redirect to={`/rooms/${id}`} />;
     } else {
-      return <h1 className="game-title">Game Lobby</h1>;
+      return <h1 className="game-title">ME-YOU</h1>;
     }
   };
 
@@ -223,6 +226,20 @@ class RoomList extends React.Component {
                 <h2>Games failed: {this.props.user.failed}</h2>
                 <form onSubmit={this.handleSubmitRoom}>
                   <h2>Create a new room</h2>
+                  <FormControl className="game-type">
+                    <Select
+                      native
+                      onChange={this.handleChangeRoom}
+                      input={
+                        <OutlinedInput name="type" id="game-type" />
+                      }
+                    >
+                      <option value={1}>Numbers</option>
+                      <option value={2}>Shapes</option>
+                      <option value={3}>Emoji</option>
+                      <option value={4}>Colors</option>
+                    </Select>
+                  </FormControl>
                   <TextField
                     id="outlined-name"
                     label="Room name"
@@ -232,12 +249,6 @@ class RoomList extends React.Component {
                     margin="normal"
                     variant="outlined"
                   />
-                  <select name="type" onChange={this.handleChangeRoom}>
-                    <option value="1">Numbers</option>
-                    <option value="2">Shapes</option>
-                    <option value="3">Emoji</option>
-                    <option value="4">Colors</option>
-                  </select>
                   <Button
                     type="submit"
                     className="add-room-btn"
