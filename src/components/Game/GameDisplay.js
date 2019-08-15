@@ -9,12 +9,13 @@ function Victory () {
 
 function Failure () {
   return <div>
-    <h2>You loose... Try one more time</h2>
+    <h2 className="game-text">You lose... Try one more time</h2>
+    <img alt="lose" src="https://www.sccpre.cat/mypng/full/56-560673_forever-alone-meme-shaped-sticker-unixstickers-png-transparent.png" />
   </div>
 }
 
 function Waiting ({ on }) {
-  return <h3>Waiting for the {on}.</h3>
+  return <h3 className="game-text">Waiting for the {on}.</h3>
 }
 
 function Button ({ onClick, value, content }) {
@@ -29,21 +30,21 @@ function Button ({ onClick, value, content }) {
 
 function History ({ round, other, previous, otherName }) {
   return round > 1
-    ? <h2>
+    ? <h2 className="game-text">
       {otherName} answered {other.value} and you answered{" "}
       {previous.value} in the previous round
     </h2>
-    : <h2>Give your answer! Will your partner match?</h2>
+    : <h2 className="game-text">Give your answer! Will your partner match?</h2>
 }
 
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
   return <div>
-    <h3>
-      Try to choose the same answer as your game partner, then you will
-      get level up, if not - you will loose your points
+    <h3 className="game-text">
+      Try to choose the same answer as your game partner,<br/>then you will
+      get level up, <br/>if not - you will loose your points
     </h3>
 
-    <h2>Choose your answer:</h2>
+    <h2 className="game-text">Choose your answer:</h2>
 
     <div className="answers-container">
       <Button value="1" content={values[0]} onClick={onClick} />
@@ -53,11 +54,11 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
       <Button value="5" content={values[4]} onClick={onClick} />
     </div>
 
-    <h2>Your level is {room.stage}</h2>
+    <h2 className="game-text">Your level is {room.stage}</h2>
 
-    <h2>It's round #{room.round}</h2>
+    <h2 className="game-text">It's round #{room.round}</h2>
 
-    <div className="container">
+    <div className="bar-container">
       <div className="progress-bar" style={styles} />
     </div>
 
@@ -79,7 +80,10 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
       room.choices.find(choice => choice.round === room.round && choice.userId === user.id)
 
     if (choice) {
-      return <Waiting on="other player's choice" />
+      return <div>
+                <Waiting on="other player's choice" />
+                <img alt="thinking-meme" src="https://tchol.org/images250_/thinking-meme-png-12.png" />
+              </div>
     }
     
     return <Choices
@@ -94,8 +98,9 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
   }
     
   return <div>
-    <h2>Hello {user.name}!</h2>
+    <h2 className="game-text">Hello {user.name}!</h2>
     <Waiting on="other player to join" />
+    <img alt="thinking-meme" src="https://tchol.org/images250_/thinking-meme-png-12.png" />
   </div>
 }
 
@@ -127,8 +132,8 @@ export default function GameDisplay(props) {
   };
 
   return (
-    <div className="hole-game">
-      <h1>Game:</h1>
+    <div className="whole-game">
+      <h1 className="game-text">Game:</h1>
       
       <Content
         room={props.room}

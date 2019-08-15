@@ -1,9 +1,27 @@
-.hole-game {
-  height: 700px;
-  background-color: #ecf0f1;
+@import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
+
+html { 
+  background: url('/bg.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-.container {
+.whole-game {
+ padding: 15px;
+ padding-bottom: 50px;
+ height: 100%;
+}
+
+body {
+ font-family: 'Orbitron', sans-serif;
+ text-align: center;
+ text-transform: capitalize;
+}
+
+.bar-container {
+  display: inline-block;
   width: 150px;
   height: 350px;
   background-image: linear-gradient(to bottom, #27ae60,#f1c40f,#c0392b)
@@ -18,4 +36,35 @@
 .figure {
   width: 40px;
   height: 40px;
+}
+
+.game-title {
+  padding-top: 40px;
+  color: white;
+  text-shadow: 2px 2px 2px #37527b;
+}
+
+.game-lobby {
+  padding: 40px;
+}
+
+.room-item {
+  padding: 10px 10px 25px;
+  margin-bottom: 20px;
+  background-color: #fef7ee !important;
+}
+
+.add-room-btn {
+  padding: 15px !important;
+  margin-top: 15px !important;
+}
+
+.join-room-btn {
+  width: 120px !important;
+}
+
+.game-text {
+  color: white;
+  text-shadow: 6px 2px 6px #162855;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
