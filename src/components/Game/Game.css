@@ -68,3 +68,7 @@ body {
   text-shadow: 6px 2px 6px #162855;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
+
+.left-img {
+  max-width: 250px;
+}
