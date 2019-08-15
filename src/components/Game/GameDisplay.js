@@ -79,14 +79,15 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
 }
 
 function Content ({ room, user, onClick, values, styles, other, previous, otherName }) {
+  if (room.stage === 10) {
+    return <Victory />
+  } 
+  
+  if (room.stage === 0) {
+    return <Failure />
+  }
+  
   if (room.users.length === 2) {
-    if (room.stage === 10) {
-      return <Victory />
-    } 
-    
-    if (room.stage === 0) {
-      return <Failure />
-    }
 
     const choice = room.choices &&
       room.choices.find(choice => choice.round === room.round && choice.userId === user.id)
@@ -110,7 +111,6 @@ function Content ({ room, user, onClick, values, styles, other, previous, otherN
   }
 
   if (room.users.length === 1 && room.stage !== 5 && room.stage !== 10 && room.stage !== 0) {
-    console.log('room.stage', room.stage)
     return <Left />
   }
     

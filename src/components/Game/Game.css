@@ -38,6 +38,11 @@ body {
   height: 40px;
 }
 
+.emoji {
+  width: 40px;
+  height: 40px;
+}
+
 .game-title {
   padding-top: 40px;
   color: white;
