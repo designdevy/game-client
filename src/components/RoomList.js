@@ -220,9 +220,14 @@ class RoomList extends React.Component {
           <Grid container justify="center" spacing={10}>
             <Grid item xs={12} sm={12} md={8} lg={8}>
               <Paper className="game-lobby">
-                <h2>Name: {this.props.user.name}</h2>
-                <h2>Games won: {this.props.user.won}</h2>
-                <h2>Games failed: {this.props.user.failed}</h2>
+                <Paper className="user-icon">
+                  <img className="person" src="https://image.flaticon.com/icons/png/128/126/126486.png" height="115px" alt="person" ></img>
+                  <div className="user-text-info">
+                  <h2>Name: {this.props.user.name}</h2>
+                  <h2>Games won: {this.props.user.won}</h2>
+                  <h2>Games failed: {this.props.user.failed}</h2>
+                  </div>
+                </Paper>
                 <form onSubmit={this.handleSubmitRoom}>
                   <h2>Create a new room</h2>
                   <FormControl className="game-type">
