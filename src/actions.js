@@ -1,41 +1,43 @@
 import { serverUrl } from "./components/serverUrl";
-import * as request from 'superagent'
+import * as request from "superagent";
 
-export const ALL_ROOMS = 'ALL_ROOMS'
+export const ALL_ROOMS = "ALL_ROOMS";
 
-export function allRooms (payload) {
+export function allRooms(payload) {
   return {
     type: ALL_ROOMS,
     payload
-  }
+  };
 }
 
-export const ADD_USER = 'ADD_USER'
+export const ADD_USER = "ADD_USER";
 
-export function addUser (payload) {
+export function addUser(payload) {
   return {
     type: ADD_USER,
     payload
-  }
+  };
 }
 
-export const JWT = "JWT"
+export const JWT = "JWT";
 
-function newLogin (payload) {
+function newLogin(payload) {
   return {
     type: JWT,
     payload
-  }
+  };
 }
 
 export const login = (name, password) => dispatch => {
-  const payload = {name, password}
+  const payload = { name, password };
   request
     .post(`${serverUrl}/logins`)
     .send(payload)
     .then(response => {
-      const action = newLogin(response.body)
-      dispatch(action)
+      if (!response.body.message) {
+        const action = newLogin(response.body.user);
+        dispatch(action);
+      }
     })
-    .catch(console.error)
-}
+    .catch(console.error);
+};

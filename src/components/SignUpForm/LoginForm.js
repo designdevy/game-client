@@ -4,6 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
+import './LoginForm.css'
 
 export default function LogInForm (props) {
   return (
@@ -46,6 +47,7 @@ export default function LogInForm (props) {
           </Grid>
         </Grid>
       </form>
+      {props.errorMessage ? <p className='error-message'>{props.errorMessage}</p> : <div />}
     </div>
   )
 }

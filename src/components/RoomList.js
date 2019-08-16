@@ -4,24 +4,24 @@ import superagent from "superagent";
 import { serverUrl } from "./serverUrl";
 import { addUser } from "../actions";
 import { Redirect } from "react-router-dom";
-import gameTypes from './Game/gameTypes'
+import gameTypes from "./Game/gameTypes";
 import SignUpForm from "./SignUpForm";
 // import Tutorial from "./Game/"
 import LoginFormContainer from "./SignUpForm/LoginFormContainer";
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
 import { Paper } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,34 +45,34 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `user-login-${index}`,
-    'aria-controls': `user-loginpanel-${index}`,
+    "aria-controls": `user-loginpanel-${index}`
   };
 }
 
-
 class RoomList extends React.Component {
   state = {
-    roomName: '',
-    userName: '',
+    roomName: "",
+    userName: "",
     type: 1,
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     redirect: false,
     roomId: "",
     tabValue: 0,
+    errorMessage: null
   };
 
   handleChangeTab = (event, newValue) => {
     this.setState({
       tabValue: newValue
     });
-  }
+  };
 
   handleClickJoin = async event => {
     event.preventDefault();
@@ -97,9 +97,7 @@ class RoomList extends React.Component {
   handleSubmitRoom = async event => {
     event.preventDefault();
 
-    const roomName = this.state.roomName === ''
-      ? null
-      : this.state.roomName
+    const roomName = this.state.roomName === "" ? null : this.state.roomName;
 
     await superagent.post(`${serverUrl}/rooms`).send({
       name: roomName,
@@ -120,31 +118,31 @@ class RoomList extends React.Component {
   handleSubmitUser = async event => {
     event.preventDefault();
 
-    const name = this.state.userName === ''
-      ? null
-      : this.state.userName
-    
-    const email = this.state.email === ''
-      ? null
-      : this.state.email
-    
-    const password = this.state.password === ''
-      ? null
-      : this.state.password
+    const name = this.state.userName === "" ? null : this.state.userName;
 
-    await superagent
-      .post(`${serverUrl}/users`)
-      .send({
-        name,
-        email,
-        password
-      })
-      .then(response => this.props.addUser(response.body));
-    this.setState({
-      userName: "",
-      email: "",
-      password: ""
-    });
+    const email = this.state.email === "" ? null : this.state.email;
+
+    const password = this.state.password === "" ? null : this.state.password;
+
+    if (name && password && email) {
+      await superagent
+        .post(`${serverUrl}/users`)
+        .send({
+          name,
+          email,
+          password
+        })
+        .then(response => this.props.addUser(response.body));
+      this.setState({
+        userName: "",
+        email: "",
+        password: ""
+      });
+    } else {
+      this.setState({
+        errorMessage: "Please enter your name, email and password"
+      });
+    }
   };
 
   renderRedirect = id => {
@@ -162,20 +160,25 @@ class RoomList extends React.Component {
           <Grid item xs={12} sm={8} md={10} lg={10}>
             <Paper className="room-item">
               <h3>{room.name}</h3>
-              {room.users.length === 2 || room.stage !== 5
-                ? <p>game in progress...</p> 
-                  : <div>
-                      <p>Game type: <b>{gameTypes(room.type)}</b>. Players in the room: <b>{room.users.length}</b></p>
-                      <button
-                        className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
-                        variant="contained"
-                        color="primary" 
-                        value={room.id}
-                        onClick={this.handleClickJoin}>
-                        Join
-                      </button>
-                    </div>
-              }
+              {room.users.length === 2 || room.stage !== 5 ? (
+                <p>game in progress...</p>
+              ) : (
+                <div>
+                  <p>
+                    Game type: <b>{gameTypes(room.type)}</b>. Players in the
+                    room: <b>{room.users.length}</b>
+                  </p>
+                  <button
+                    className="MuiButtonBase-root MuiButton-root join-room-btn MuiButton-contained MuiButton-containedPrimary"
+                    variant="contained"
+                    color="primary"
+                    value={room.id}
+                    onClick={this.handleClickJoin}
+                  >
+                    Join
+                  </button>
+                </div>
+              )}
             </Paper>
           </Grid>
         </Grid>
@@ -207,6 +210,7 @@ class RoomList extends React.Component {
                 userName={this.state.userName}
                 email={this.state.email}
                 password={this.state.password}
+                errorMessage={this.state.errorMessage}
               />
             </TabPanel>
           </Grid>
@@ -229,9 +233,7 @@ class RoomList extends React.Component {
                     <Select
                       native
                       onChange={this.handleChangeRoom}
-                      input={
-                        <OutlinedInput name="type" id="game-type" />
-                      }
+                      input={<OutlinedInput name="type" id="game-type" />}
                     >
                       <option value={1}>Numbers</option>
                       <option value={2}>Shapes</option>

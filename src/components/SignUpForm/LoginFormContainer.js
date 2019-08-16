@@ -6,7 +6,8 @@ import LogInForm from "./LoginForm";
 class LoginFormContainer extends React.Component {
   state = {
     name: "",
-    password: ""
+    password: "",
+    errorMessage: null
   };
 
   handleChangeUser = event => {
@@ -17,11 +18,15 @@ class LoginFormContainer extends React.Component {
 
   handleSubmitUser = async event => {
     event.preventDefault();
-    this.props.login(this.state.name, this.state.password);
-    this.setState({
-      name: "",
-      password: ""
-    });
+    if (this.state.name !== '' && this.state.password !== '') {
+      this.props.login(this.state.name, this.state.password);
+      this.setState({
+        name: "",
+        password: ""
+      });
+    } else {
+      this.setState({ errorMessage: 'Please supply a valid name and password'})
+    }
   };
 
   render() {
@@ -30,11 +35,18 @@ class LoginFormContainer extends React.Component {
     onChange={this.handleChangeUser} 
     userName={this.state.name}
     password={this.state.password}
+    errorMessage={this.state.errorMessage}
     />
   }
 }
 
+function MapStateToProps(state) {
+  return {
+    errorMessage: state.errorMessage
+  };
+}
+
 export default connect(
-  null,
+  MapStateToProps,
   { login }
 )(LoginFormContainer);
