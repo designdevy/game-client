@@ -75,6 +75,15 @@ function PartnerHistory ({ other, otherName, values, room}) {
 
 function Choices ({ onClick, room, values, styles, other, previous, otherName }) {
   const gridBarContainerSize = room.round > 1 ? 4 : 12
+
+  const answers = [
+    <Btn value="1" content={values[0]} onClick={onClick} />,
+    <Btn value="2" content={values[1]} onClick={onClick} />,
+    <Btn value="3" content={values[2]} onClick={onClick} />,
+    <Btn value="4" content={values[3]} onClick={onClick} />,
+    <Btn value="5" content={values[4]} onClick={onClick} />
+  ]
+
   return <div>
     <h3 className="game-text">
       Try to choose the same answer as your game partner,<br/>then you will
@@ -84,11 +93,7 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
     <h2 className="game-text">Choose your answer:</h2>
 
     <div className="answers-container">
-      <Btn value="1" content={values[0]} onClick={onClick} />
-      <Btn value="2" content={values[1]} onClick={onClick} />
-      <Btn value="3" content={values[2]} onClick={onClick} />
-      <Btn value="4" content={values[3]} onClick={onClick} />
-      <Btn value="5" content={values[4]} onClick={onClick} />
+      {answers.map(answer => answer)}
     </div>
 
     {room.round === 1
