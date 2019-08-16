@@ -8,6 +8,10 @@ html {
   background-size: cover;
 }
 
+.quiter-btn {
+  border: 2px solid white !important;
+}
+
 .whole-game {
  padding: 15px;
  padding-bottom: 50px;
@@ -15,7 +19,6 @@ html {
 }
 
 body {
- font-family: 'Orbitron', sans-serif;
  text-align: center;
  text-transform: capitalize;
 }
@@ -28,27 +31,33 @@ body {
 }
 
 .answer-button {
-  width: 55px;
-  height: 55px;
+  width: 100px;
+  height: 100px;
   margin: 10px;
+  background-color: #ffffff00;
+  border: none;
 }
 
 .figure {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
+  background-color: #dbe75f;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .color {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
 }
 
 .emoji {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
 }
 
 .game-title {
+  font-family: 'Orbitron', sans-serif;
   padding-top: 40px;
   color: white;
   text-shadow: 2px 2px 2px #37527b;
@@ -61,12 +70,18 @@ body {
 .room-item {
   padding: 10px 10px 25px;
   margin-bottom: 20px;
-  background-color: #fef7ee !important;
+  background-color: #72eed0 !important;
+  border: 2px solid #312033;
 }
 
 .add-room-btn {
   padding: 15px !important;
-  margin-top: 15px !important;
+  margin-top: 17px !important;
+}
+
+.game-type {
+  display: inline-flex !important;
+  margin-top: 16px !important;
 }
 
 .join-room-btn {
@@ -90,4 +105,27 @@ body {
 
 .others-answer {
   font-size: 4em;
+}
+
+.number-choice {
+  font-size: 5em;
+  color: white;
+  width: 90%;
+  background-color: #c3422c;
+  display: block;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.number-choice-selected {
+  margin-left: 35%;
+  padding-top: 15px;
+  padding-bottom: 4px;
+  font-size: 55px;
+  color: white;
+  width: 85px;
+  background-color: #c3422c;
+  display: block;
+  border-radius: 50%;
+  border: 2px solid white;
 }
