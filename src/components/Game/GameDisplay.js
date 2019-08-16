@@ -210,17 +210,16 @@ export default function GameDisplay(props) {
       user.id !== props.user.id
   ).name : "Anonymos";
 
-  let height = 350 - parseInt(props.room.stage) * 35;
+  let height = 300 - parseInt(props.room.stage) * 30;
 
   let styles = {
-    width: "150px",
+    width: "140px",
     height: height + "px",
     backgroundColor: "white"
   };
 
   return (
     <div className="whole-game">
-      <h1 className="game-text">Game:</h1>
       
       <Content
         room={props.room}
