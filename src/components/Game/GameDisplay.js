@@ -79,23 +79,23 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
   const answers = [
     {
       index: 1,
-      answer: <Btn value="1" content={values[0]} onClick={onClick} />
+      answer: <Btn value="1" key="1" content={values[0]} onClick={onClick} />
     },
     {
       index: 2,
-      answer: <Btn value="2" content={values[1]} onClick={onClick} />
+      answer: <Btn value="2" key="2" content={values[1]} onClick={onClick} />
     },
     {
       index: 3,
-      answer: <Btn value="3" content={values[2]} onClick={onClick} />
+      answer: <Btn value="3" key="3" content={values[2]} onClick={onClick} />
     },
     {
       index: 4,
-      answer: <Btn value="4" content={values[3]} onClick={onClick} />
+      answer: <Btn value="4" key="14" content={values[3]} onClick={onClick} />
     },
     {
       index: 5,
-      answer: <Btn value="5" content={values[4]} onClick={onClick} />
+      answer: <Btn value="5" key="5" content={values[4]} onClick={onClick} />
     }
   ]
 

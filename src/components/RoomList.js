@@ -132,7 +132,7 @@ class RoomList extends React.Component {
           email,
           password
         })
-        .then(response => this.props.addUser(response.body));
+        .then(response => this.props.addUser(response.body.user));
       this.setState({
         userName: "",
         email: "",
