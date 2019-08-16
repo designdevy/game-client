@@ -6,8 +6,7 @@ import RoomList from "../src/components/RoomList";
 import "./App.css";
 import GameContainer from "./components/Game/GameContainer";
 
-// const serverUrl = "https://polar-sands-55886.herokuapp.com/stream";
-const serverUrl = "http://localhost:5000/stream";
+const serverUrl = "https://polar-sands-55886.herokuapp.com/stream" || "http://localhost:5000/stream";
 
 class App extends React.Component {
   source = new EventSource(serverUrl);

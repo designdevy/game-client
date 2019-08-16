@@ -19,11 +19,19 @@ class LoginFormContainer extends React.Component {
   handleSubmitUser = async event => {
     event.preventDefault();
     if (this.state.name !== '' && this.state.password !== '') {
-      this.props.login(this.state.name, this.state.password);
-      this.setState({
-        name: "",
-        password: ""
-      });
+      await this.props.login(this.state.name, this.state.password);
+      if (!this.props.user.jwt){
+        this.setState({
+          name: "",
+          password: "",
+          errorMessage: 'Please supply a valid name and password or Sign Up'
+        });
+      } else {
+        this.setState({
+          name: "",
+          password: ""
+        });
+      }
     } else {
       this.setState({ errorMessage: 'Please supply a valid name and password'})
     }
@@ -42,7 +50,7 @@ class LoginFormContainer extends React.Component {
 
 function MapStateToProps(state) {
   return {
-    errorMessage: state.errorMessage
+    user: state.user
   };
 }
 
