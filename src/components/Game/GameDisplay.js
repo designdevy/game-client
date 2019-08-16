@@ -77,24 +77,46 @@ function Choices ({ onClick, room, values, styles, other, previous, otherName })
   const gridBarContainerSize = room.round > 1 ? 4 : 12
 
   const answers = [
-    <Btn value="1" content={values[0]} onClick={onClick} />,
-    <Btn value="2" content={values[1]} onClick={onClick} />,
-    <Btn value="3" content={values[2]} onClick={onClick} />,
-    <Btn value="4" content={values[3]} onClick={onClick} />,
-    <Btn value="5" content={values[4]} onClick={onClick} />
+    {
+      index: 1,
+      answer: <Btn value="1" content={values[0]} onClick={onClick} />
+    },
+    {
+      index: 2,
+      answer: <Btn value="2" content={values[1]} onClick={onClick} />
+    },
+    {
+      index: 3,
+      answer: <Btn value="3" content={values[2]} onClick={onClick} />
+    },
+    {
+      index: 4,
+      answer: <Btn value="4" content={values[3]} onClick={onClick} />
+    },
+    {
+      index: 5,
+      answer: <Btn value="5" content={values[4]} onClick={onClick} />
+    }
   ]
+
+  const conditionDifficulty = room.stage === 8 && previous.value === other.value;
 
   return <div>
     <h3 className="game-text">
       Try to choose the same answer as your game partner,<br/>then you will
-      get level up, <br/>if not - you will loose your points
+      go level up, <br/>if not - you will loose your points
     </h3>
 
     <h2 className="game-text">Choose your answer:</h2>
 
-    <div className="answers-container">
-      {answers.map(answer => answer)}
-    </div>
+    {conditionDifficulty 
+      ? <div className="answers-container">
+          {answers.filter(answer => answer.index !== previous.value).map(answer => answer.answer)}
+        </div> 
+      : <div className="answers-container">
+          {answers.map(answer => answer.answer)}
+        </div>
+    }
 
     {room.round === 1
     ? <h2 className="game-text">Give your answer! Will your partner match?</h2>
