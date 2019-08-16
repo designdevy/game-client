@@ -49,24 +49,6 @@ function Btn ({ onClick, value, content }) {
   </button>
 }
 
-function History ({ other, previous, otherName, values }) {
-  const yourAnswer = values[parseInt(previous.value) - 1]
-  const partnersAnswer = values[parseInt(other.value) - 1]
-
-  return <div>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <h2 className="game-text">You answered:</h2>
-            <div className="your-answer">{yourAnswer}</div>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <h2 className="game-text">{otherName} answered:</h2>
-            <div className="others-answer">{partnersAnswer}</div>
-          </Grid>
-        </Grid>
-        </div>
-}
-
 function YourHistory ({ previous, values, room}) {
   let yourAnswer = values[parseInt(previous.value) - 1]
   if (room.type === 1) {

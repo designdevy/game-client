@@ -21,7 +21,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 function TabPanel(props) {
@@ -106,6 +105,7 @@ class RoomList extends React.Component {
       name: roomName,
       type: this.state.type
     });
+
     this.setState({
       roomName: ""
     });
@@ -215,7 +215,6 @@ class RoomList extends React.Component {
     );
 
     if (this.props.user !== "Anonymos") {
-      console.log("this.props.user", this.props.user);
       roomListBody = (
         <div>
           <Grid container justify="center" spacing={10}>
