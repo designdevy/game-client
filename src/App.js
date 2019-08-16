@@ -3,9 +3,11 @@ import { allRooms } from "./actions";
 import { connect } from "react-redux";
 import { Route } from 'react-router-dom'
 import RoomList from "../src/components/RoomList";
-import { serverUrl } from "./components/serverUrl";
 import "./App.css";
 import GameContainer from "./components/Game/GameContainer";
+
+// const serverUrl = "https://polar-sands-55886.herokuapp.com/stream";
+const serverUrl = "http://localhost:5000/stream";
 
 class App extends React.Component {
   source = new EventSource(serverUrl);
