@@ -19,7 +19,7 @@ function Victory () {
 
 function Failure () {
   return <div>
-    <h2 className="game-text">You lose... Try one more time</h2>
+    <h2 className="game-text">You lose... Try again :(</h2>
     <img alt="lose" src="https://media.tenor.com/images/64447af076fd4f692790601de9c710f3/tenor.gif" />
   </div>
 }

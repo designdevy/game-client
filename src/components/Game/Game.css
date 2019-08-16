@@ -67,10 +67,28 @@ body {
   padding: 40px;
 }
 
+.user-text-info {
+  display: inline-block; 
+  text-align: left;
+}
+
+.user-icon {
+  border-radius: 40px !important;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: #529db1 !important;
+  color: black !important;
+  padding: 10px 10px 25px;
+}
+
+.person {
+  padding-right: 30px;
+}
+
 .room-item {
   padding: 10px 10px 25px;
   margin-bottom: 20px;
-  background-color: #72eed0 !important;
+  background-color: #549fb6 !important;
   border: 2px solid #312033;
 }
 
