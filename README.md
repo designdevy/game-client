@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Game Me + You
 
-## Available Scripts
+Made in collaboration with [Rejin Cusi](https://github.com/rejincusi)
 
-In the project directory, you can run:
+#### The backend for this project [game-server](https://github.com/nataliaev/geme-server)
 
-### `npm start`
+#### To play the game, head to [Me + You](https://me-and-you.netlify.com)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies used
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+-   [React](https://reactjs.org)
+-   [Redux](https://redux.js.org)
+-   [Superagent](http://visionmedia.github.io/superagent/)
+-   [Material-UI](https://material-ui.com)
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- You need to log in or sign up.
+- You can create a new game room or join one of the existing rooms to start the game.
+- You can choose one of 4 types of the game: Numbers, Shapes, Colors or Emojies.
+- During the game you and your partner try to undestand each other and choose the same variants. To help you to guess the right answer you are shown a hint - the previous answer of your partner.
+- You also can see the current level, that you have riched in the game (labeled with color).
+- At some level the game becomes more difficult to prevent you from giving the same answers in each round.
+- Your results are saved to the database and you can see the total amount of your games won & failed.
+- The room is deleated when the players left it.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+> git clone git@github.com:nataliaev/game-client.git
+> cd game-client
+> npm install
+> npm run start
+```
